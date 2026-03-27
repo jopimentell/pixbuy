@@ -310,7 +310,6 @@ docker-compose up -d
 - [Documentação Docker](https://docs.docker.com/)
 - [Documentação PHP](https://www.php.net/docs.php)
 - [Documentação MySQL](https://dev.mysql.com/doc/)
-- [GitHub Actions](https://docs.github.com/actions)
 - [Pix helper](https://www.mco2.com.br/artigos/aprenda-como-gerar-qr-code-e-codigo-pix-em-php.html)
 
 
