@@ -234,11 +234,6 @@ chmod +x tests/test.sh
 | 5 | Volume de persistência existe |
 | 6 | Arquivos do projeto existem |
 
-### 7. GitHub Actions (CI/CD)
-
-O projeto inclui workflow automático:
-- Arquivo: `.github/workflows/docker-test.yml`
-- Executa testes a cada `push` na branch `main`
 
 
 ## 🧪 Executando os Testes
