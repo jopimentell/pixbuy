@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: pixbuy_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - pixbuy-network
+
+  db:
+    image: mysql:8.0
+    container_name: pixbuy_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: pixbuy_db
+      MYSQL_USER: pixbuy_user
+      MYSQL_PASSWORD: pixbuy123
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - pixbuy-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pixbuy_phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - pixbuy-network
+
+networks:
+  pixbuy-network:
+    driver: bridge
+
+volumes:
+  db_data:
