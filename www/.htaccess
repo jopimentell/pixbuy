@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirecionar /buy/slug para buy.php?slug=slug
+RewriteRule ^buy/([a-zA-Z0-9_-]+)$ buy.php?slug=$1 [L,QSA]
+
+# Redirecionar /admin para admin/index.php
+RewriteRule ^admin$ admin/index.php [L]
+
+# Se o arquivo ou diretório não existir, redirecionar para 404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
