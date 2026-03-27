@@ -1,0 +1,37 @@
+name: Deploy PixBuy
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build Docker image
+      run: |
+        docker build -t pixbuy-app .
+    
+    - name: Run tests
+      run: |
+        docker run --rm pixbuy-app php -v
+        docker run --rm pixbuy-app php -m | grep mysqli
+    
+    - name: Verify files
+      run: |
+        docker run --rm --entrypoint ls pixbuy-app -la /var/www/html/
+    
+    - name: Build for production
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      run: |
+        docker build -t pixbuy:latest .
+        echo "Build completed successfully"
