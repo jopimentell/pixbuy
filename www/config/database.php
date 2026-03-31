@@ -1,10 +1,11 @@
 <?php
 // config/database.php
+
 class Database {
     private $host = "db";
     private $db_name = "pixbuy_db";
-    private $username = "pixbuy_user";
-    private $password = "pixbuy123";
+    private $username = "root";
+    private $password = "root123";
     public $conn;
 
     public function getConnection() {
